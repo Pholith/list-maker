@@ -1,7 +1,6 @@
 export interface Section {
   id: number;
   title: string;
-  numColumn: number;
   columnTitles: string[];
   elements: string[];
 }

@@ -8,11 +8,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    EditRadioButton: typeof import('./components/subComponents/EditRadioButton.vue')['default']
+    EditSection: typeof import('./components/subComponents/EditSection.vue')['default']
     Main: typeof import('./components/Main.vue')['default']
     PageNotFound: typeof import('./components/PageNotFound.vue')['default']
-    RadioButton: typeof import('./components/modules/RadioButton.vue')['default']
+    RadioButton: typeof import('./components/subComponents/RadioButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Section: typeof import('./components/modules/Section.vue')['default']
+    Section: typeof import('./components/subComponents/Section.vue')['default']
+    SectionMaker: typeof import('./components/modules/SectionMaker.vue')['default']
   }
 }

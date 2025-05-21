@@ -10,20 +10,16 @@ export const useListStore = defineStore('list', () => {
   const sections = ref<Section[]>(defaultSections);
   const buttons = ref<RadioButton[]>(defaultButtons);
 
-  function addSection(title: string, numColumn: number, columnTitles: string[], elements?: string[]) {
+  function addSection(title: string, columnTitles: string[], elements?: string[]) {
     const id = Date.now();
 
-    if (numColumn === columnTitles.length) {
       sections.value.push({
         id,
         title,
-        numColumn,
         columnTitles,
         elements: elements ? elements : []
       });
-    } else {
-      snackbarStore.openSnackbar('error', "Columns number and Column titles number doesn't match");
-    }
+    
   }
 
   function removeSection(id: number) {
@@ -32,6 +28,20 @@ export const useListStore = defineStore('list', () => {
       sections.value.splice(index, 1);
     } else {
       snackbarStore.openSnackbar('error', "Couldn't find the section to delete, the dev probably sucks");
+    }
+  }
+
+  function editSection(id: number, title: string, columnTitles: string[], elements: string[]) {
+    const index = sections.value.findIndex((item) => item.id === id);
+    if (index != -1) {
+      sections.value[index] = {
+        id,
+        title,
+        columnTitles,
+        elements
+      }
+    } else {
+      snackbarStore.openSnackbar('error', "Couldn't find the section to edit, the dev probably sucks");
     }
   }
 
@@ -54,5 +64,5 @@ export const useListStore = defineStore('list', () => {
     }
   }
 
-  return { sections, buttons, addSection, removeSection, addRadionButton, removeRadioButton };
+  return { sections, buttons, addSection, removeSection, editSection, addRadionButton, removeRadioButton };
 });

@@ -27,29 +27,31 @@ export const defaultSections: Section[] = [
   {
     id: 0,
     title: 'First Section',
-    numColumn: 2,
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'first element']
+    elements: ['first element', 'second element', 'third element']
   },
   {
     id: 1,
     title: 'Second Section',
-    numColumn: 1,
     columnTitles: ['Column A'],
-    elements: ['first element', 'second element', 'first element']
+    elements: ['first element', 'second element', 'thrid element']
   },
   {
     id: 2,
     title: 'Third Section',
-    numColumn: 2,
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'first element']
+    elements: ['first element', 'second element']
   },
   {
     id: 3,
     title: 'Fourth Section',
-    numColumn: 2,
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'first element']
+    elements: ['first element', 'second element', 'third element', 'fourth element']
+  },
+    {
+    id: 4,
+    title: 'Fifth Section',
+    columnTitles: ['Column A', 'Columbi a'],
+    elements: ['first element', 'second element', 'third element',]
   }
 ];
