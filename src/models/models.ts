@@ -1,8 +1,10 @@
+import type { ExKink } from "./kinks";
+
 export interface Section {
   id: number;
   title: string;
   columnTitles: string[];
-  elements: string[];
+  elements: ExKink[];
 }
 
 export interface RadioButton {

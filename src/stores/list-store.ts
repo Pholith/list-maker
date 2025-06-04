@@ -3,23 +3,24 @@ import { ref } from 'vue';
 import { useSnackbarStore } from './snackbar-store';
 import type { RadioButton, Section } from '@/models/models';
 import { defaultButtons, defaultSections } from '@/assets/defaultConfig';
-
-const snackbarStore = useSnackbarStore();
+import type { ExKink } from '@/models/kinks';
 
 export const useListStore = defineStore('list', () => {
+  const snackbarStore = useSnackbarStore();
   const sections = ref<Section[]>(defaultSections);
   const buttons = ref<RadioButton[]>(defaultButtons);
+  const username = ref<string>('');
+  const encodeData = ref<boolean>(false);
 
-  function addSection(title: string, columnTitles: string[], elements?: string[]) {
+  function addSection(title: string, columnTitles: string[], elements?: ExKink[]) {
     const id = Date.now();
 
-      sections.value.push({
-        id,
-        title,
-        columnTitles,
-        elements: elements ? elements : []
-      });
-    
+    sections.value.push({
+      id,
+      title,
+      columnTitles,
+      elements: elements ? elements : []
+    });
   }
 
   function removeSection(id: number) {
@@ -31,7 +32,7 @@ export const useListStore = defineStore('list', () => {
     }
   }
 
-  function editSection(id: number, title: string, columnTitles: string[], elements: string[]) {
+  function editSection(id: number, title: string, columnTitles: string[], elements: ExKink[]) {
     const index = sections.value.findIndex((item) => item.id === id);
     if (index != -1) {
       sections.value[index] = {
@@ -39,7 +40,8 @@ export const useListStore = defineStore('list', () => {
         title,
         columnTitles,
         elements
-      }
+      };
+      console.log(sections.value[index]);
     } else {
       snackbarStore.openSnackbar('error', "Couldn't find the section to edit, the dev probably sucks");
     }
@@ -64,5 +66,15 @@ export const useListStore = defineStore('list', () => {
     }
   }
 
-  return { sections, buttons, addSection, removeSection, editSection, addRadionButton, removeRadioButton };
+  return {
+    sections,
+    buttons,
+    username,
+    encodeData,
+    addSection,
+    removeSection,
+    editSection,
+    addRadionButton,
+    removeRadioButton
+  };
 });

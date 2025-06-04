@@ -1,25 +1,18 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
 
-// Plugins
 import { registerPlugins } from '@/plugins';
 
-// Components
 import App from './App.vue';
 
-// Composables
 import { createApp } from 'vue';
 
-// Styles
 import 'unfonts.css';
 import { createPinia } from 'pinia';
+import VueCookies from 'vue-cookies'
 
 const app = createApp(App);
 
 app.use(createPinia());
+app.use(VueCookies)
 registerPlugins(app);
 
 app.mount('#app');

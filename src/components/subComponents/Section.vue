@@ -1,8 +1,8 @@
 <template>
   <v-card>
-    <v-card-title elevation="2" class="card-title bg-secondary" >
+    <v-card-title elevation="2" class="card-title bg-secondary">
       {{ section.title }}
-      <EditSection :section="section" :isEditing="true"/>
+      <EditSection :section="section" :isEditing="true" />
     </v-card-title>
     <v-card-item>
       <v-table>
@@ -17,11 +17,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="element in section.elements" :key="'row-' + element">
-            <td v-for="column in section.columnTitles" :key="'cell-' + element + '-' + column" class="td">
-              <RadioButton> </RadioButton>
+          <tr v-for="element in section.elements" :key="'row-' + element.name">
+            <td v-for="column in section.columnTitles" :key="'cell-' + element.name + '-' + column" class="td">
+              <RadioButton :section="section" :subcategory="column" :element="element"> </RadioButton>
             </td>
-            <td>{{ element }}</td>
+            <td>{{ element.name }}</td>
           </tr>
         </tbody>
       </v-table>

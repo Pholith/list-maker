@@ -1,6 +1,6 @@
 <template>
   <v-container class="container">
-    <v-radio-group inline class="custom-cell">
+    <v-radio-group inline class="custom-cell" v-model="element.ratings[subcategory]">
       <v-radio
         v-for="button in listStore.buttons"
         :base-color="button.buttonColor"
@@ -12,14 +12,18 @@
 </template>
 
 <script setup lang="ts">
+import type { ExKink } from '@/models/kinks';
 import { useListStore } from '@/stores/list-store';
+import { ref } from 'vue';
+
+const { subcategory, element } = defineProps<{ subcategory: string; element: ExKink }>();
 
 const listStore = useListStore();
 </script>
 
 <style scoped>
 .container {
-    padding: 2px;
+  padding: 2px;
 }
 
 .custom-cell {

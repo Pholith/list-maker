@@ -1,3 +1,4 @@
+import type { ExKink } from '@/models/kinks';
 import type { RadioButton, Section } from '@/models/models';
 
 export const defaultButtons: RadioButton[] = [
@@ -23,35 +24,53 @@ export const defaultButtons: RadioButton[] = [
   }
 ];
 
+const defaultKink: ExKink = {
+  name: 'def',
+  ratings: {
+    'Column A': 'NaN',
+    'Columbi a': 'NaN'
+  }
+};
+
 export const defaultSections: Section[] = [
   {
     id: 0,
     title: 'First Section',
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'third element']
+    elements: [
+      {
+        name: 'def',
+        ratings: {
+          'Column A': 'NaN',
+          'Columbi a': 'NaN'
+        }
+      },
+      defaultKink,
+      defaultKink
+    ]
   },
   {
     id: 1,
     title: 'Second Section',
     columnTitles: ['Column A'],
-    elements: ['first element', 'second element', 'thrid element']
+    elements: [defaultKink, defaultKink, defaultKink]
   },
   {
     id: 2,
     title: 'Third Section',
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element']
+    elements: [defaultKink, defaultKink]
   },
   {
     id: 3,
     title: 'Fourth Section',
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'third element', 'fourth element']
+    elements: [defaultKink, defaultKink, defaultKink, defaultKink]
   },
-    {
+  {
     id: 4,
     title: 'Fifth Section',
     columnTitles: ['Column A', 'Columbi a'],
-    elements: ['first element', 'second element', 'third element',]
+    elements: [defaultKink, defaultKink, defaultKink]
   }
 ];

@@ -62,6 +62,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ExKink } from '@/models/kinks';
 import type { Section } from '@/models/models';
 import { useListStore } from '@/stores/list-store';
 import { ref, watch } from 'vue';
@@ -80,7 +81,7 @@ watch(isDialogOpened, () => {
     columnTitles.value = [section?.columnTitles[0] ?? '', section?.columnTitles[1] ?? ''];
     pretendElements.value = [];
     section?.elements.forEach((element) => {
-      pretendElements.value.push(element);
+      pretendElements.value.push(element.name);
     });
   }
 });
@@ -105,13 +106,35 @@ async function editCreateSection() {
       while (columnTitles.value.length > numColumns.value) {
         columnTitles.value.pop();
       }
-      listStore.editSection(section.id, sectionTitle.value, columnTitles.value, pretendElements.value);
+      const kinks: ExKink[] = [];
+      pretendElements.value.forEach((pretendElement) => {
+        const defaultRating: Record<string, string> = {};
+        columnTitles.value.forEach((key) => {
+          defaultRating[key] = 'NaN';
+        });
+        kinks.push({
+          name: pretendElement,
+          ratings: section.elements.find((element) => element.name === pretendElement)?.ratings ?? defaultRating
+        });
+      });
+      listStore.editSection(section.id, sectionTitle.value, columnTitles.value, kinks);
     }
   } else {
     while (columnTitles.value.length > numColumns.value) {
       columnTitles.value.pop();
     }
-    listStore.addSection(sectionTitle.value, columnTitles.value, pretendElements.value);
+    const kinks: ExKink[] = [];
+    pretendElements.value.forEach((pretendElement) => {
+      const defaultRating: Record<string, string> = {};
+      columnTitles.value.forEach((key) => {
+        defaultRating[key] = 'NaN';
+      });
+      kinks.push({
+        name: pretendElement,
+        ratings: defaultRating
+      });
+    });
+    listStore.addSection(sectionTitle.value, columnTitles.value, kinks);
   }
   isDialogOpened.value = false;
 }
