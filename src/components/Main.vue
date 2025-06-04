@@ -37,9 +37,12 @@
     <EditSection :isEditing="false" />
     <v-btn :loading="loading" @click="exportList"></v-btn>
   </v-row>
+  <div id="canvas-container"></div>
 </template>
 
 <script setup lang="ts">
+import { listMakerDataToAPI } from '@/services/changeDataModelServices';
+import { generateKinklistImage } from '@/services/generateImage';
 import { exportImage } from '@/services/uploadToImgur';
 import { useListStore } from '@/stores/list-store';
 import { ref } from 'vue';
@@ -52,5 +55,13 @@ async function exportList() {
   loading.value = true;
   await exportImage();
   loading.value = false;
+  const { categories, ratings } = listMakerDataToAPI();
+  const canvas = generateKinklistImage(categories, ratings, listStore.username, listStore.encodeData);
+  const container = document.getElementById('canvas-container');
+  if (container) {
+    container.appendChild(canvas);
+  } else {
+    console.error('Canvas container not found!');
+  }
 }
 </script>
