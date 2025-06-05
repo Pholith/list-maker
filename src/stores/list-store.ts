@@ -7,8 +7,8 @@ import type { ExKink } from '@/models/kinks';
 
 export const useListStore = defineStore('list', () => {
   const snackbarStore = useSnackbarStore();
-  const sections = ref<Section[]>(defaultSections);
-  const buttons = ref<RadioButton[]>(defaultButtons);
+  const sections = ref<Section[]>(defaultSections ?? []);
+  const buttons = ref<RadioButton[]>(defaultButtons ?? []);
   const username = ref<string>('');
   const encodeData = ref<boolean>(false);
 
