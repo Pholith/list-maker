@@ -19,7 +19,7 @@
             ></div>
             {{ radioButton.buttonName }}
           </v-col>
-          <v-col style="display: flex; justify-content: center">
+          <v-col style="display: flex; justify-content: center; padding-bottom: 20px">
             <EditRadioButton />
           </v-col>
         </v-row>
