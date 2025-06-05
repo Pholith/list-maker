@@ -30,6 +30,7 @@ export async function exportImage(): Promise<void> {
 
   const { categories, ratings } = listMakerDataToAPI();
   try {
+    console.log(listStore.encodeData, listStore.username);
     const canvas = generateKinklistImage(categories, ratings, listStore.username, listStore.encodeData);
     const id = await uploadImageToImgur(canvas);
     const hasAnyComment = categories.some((c) => c.kinks.some((k) => k.comment));

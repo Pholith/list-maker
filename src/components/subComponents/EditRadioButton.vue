@@ -12,27 +12,27 @@
         <v-card-item>
           <v-row style="padding-top: 10px" />
           <v-row v-for="button in listStore.buttons" style="display: flex; align-items: center">
-            <div
-              style="
-                display: flex;
-                flex-flow: column;
-                justify-content: space-around;
-                align-items: center;
-                width: 100px;
-                height: 50px;
-              "
-            >
-              <div
-                class="rounded-circle mx-auto"
-                :style="'background-color:' + button.buttonColor"
-                style="height: 20px; width: 20px"
-              ></div>
+            <ColorPicker :button="button" />
+            <v-text-field style="padding-top: 15px" label="Button name" v-model="button.buttonName"></v-text-field>
+            <div style="padding: 15px">
+              <v-btn icon="mdi-delete" color="red" @click="listStore.removeRadioButton(button.id)" />
             </div>
-            <v-text-field label="Button name" v-model="button.buttonName"></v-text-field>
           </v-row>
           <v-row style="display: flex; justify-content: space-evenly">
-            <v-btn prepend-icon="mdi-plus" text="Add Button" rounded="sm" color="secondary" @click="addButton" />
-            <v-btn prepend-icon="mdi-minus" text="Remove Button" rounded="sm" color="red" @click="removeLastButton" />
+            <v-btn
+              prepend-icon="mdi-plus"
+              text="Add Button"
+              rounded="sm"
+              color="secondary"
+              @click="listStore.addRadionButton('#808080', '')"
+            />
+            <v-btn
+              prepend-icon="mdi-minus"
+              text="Remove Button"
+              rounded="sm"
+              color="red"
+              @click="listStore.removeLastButton"
+            />
           </v-row>
           <v-row style="padding-bottom: 18px" />
         </v-card-item>
@@ -47,13 +47,4 @@ import { ref } from 'vue';
 
 const isDialogOpened = ref(false);
 const listStore = useListStore();
-
-function addButton() {
-    listStore.addRadionButton("grey","")
-}
-
-function removeLastButton() {
-    listStore.removeRadioButton(listStore.buttons[-1].id)
-}
-
 </script>

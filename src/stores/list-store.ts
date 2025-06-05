@@ -66,6 +66,14 @@ export const useListStore = defineStore('list', () => {
     }
   }
 
+  function removeLastButton() {
+    if (buttons.value.length < 1) {
+      snackbarStore.openSnackbar('error', 'There are no more buttons');
+    } else {
+      buttons.value.pop();
+    }
+  }
+
   return {
     sections,
     buttons,
@@ -75,6 +83,7 @@ export const useListStore = defineStore('list', () => {
     removeSection,
     editSection,
     addRadionButton,
-    removeRadioButton
+    removeRadioButton,
+    removeLastButton
   };
 });

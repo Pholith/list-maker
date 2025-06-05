@@ -4,22 +4,22 @@ import type { RadioButton, Section } from '@/models/models';
 export const defaultButtons: RadioButton[] = [
   {
     id: 0,
-    buttonColor: 'blue',
+    buttonColor: '#0000FF',
     buttonName: 'favorite'
   },
   {
     id: 1,
-    buttonColor: 'green',
+    buttonColor: '#00FF00',
     buttonName: 'like'
   },
   {
     id: 2,
-    buttonColor: 'yellow',
+    buttonColor: '#FFFF00',
     buttonName: 'interested'
   },
   {
     id: 3,
-    buttonColor: 'red',
+    buttonColor: '#FF0000',
     buttonName: 'no'
   }
 ];

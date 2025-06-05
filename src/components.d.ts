@@ -8,6 +8,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppBar: typeof import('./components/subComponents/AppBar.vue')['default']
+    ColorPicker: typeof import('./components/subComponents/ColorPicker.vue')['default']
     EditRadioButton: typeof import('./components/subComponents/EditRadioButton.vue')['default']
     EditSection: typeof import('./components/subComponents/EditSection.vue')['default']
     Main: typeof import('./components/Main.vue')['default']

@@ -146,7 +146,6 @@ const drawCategory = (
   includeComments: boolean
 ): void => {
   // Draw title
-  console.log(ratings);
   context.fillStyle = '#000000';
   context.font = 'bold 36px Arial';
   context.fillText(category.name, x, y + 10);
