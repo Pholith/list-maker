@@ -13,7 +13,22 @@
       </v-tooltip>
     </template>
     <template #default>
-      <v-card :title="whichTitle(isEditing)">
+      <v-card>
+        <v-card-title elevation="2" class="card-title bg-secondary">
+          {{ whichTitle(isEditing) }}
+          <v-tooltip text="Delete section">
+            <template #activator="{ props }">
+              <v-btn
+                v-bind="{ ...props }"
+                v-if="isEditing"
+                icon="mdi-delete"
+                color="red"
+                size="large"
+                @click="deleteSection"
+              />
+            </template>
+          </v-tooltip>
+        </v-card-title>
         <v-card-item style="padding-top: 0; overflow: scroll">
           <v-text-field label="Section Name" v-model="sectionTitle" />
           <v-row>
@@ -92,6 +107,13 @@ function whichTitle(isEditing: boolean) {
   return isEditing ? 'Edit Section' : 'Create Section';
 }
 
+function deleteSection() {
+  if (section) {
+    listStore.removeSection(section.id);
+  }
+  isDialogOpened.value = false;
+}
+
 function addLine() {
   pretendElements.value.push('');
 }
@@ -139,3 +161,11 @@ async function editCreateSection() {
   isDialogOpened.value = false;
 }
 </script>
+
+<style scoped>
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</style>

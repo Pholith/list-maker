@@ -32,12 +32,16 @@
         <Section :section="section"></Section>
       </v-container>
     </v-col>
+    <v-col style="padding: 22px">
+      <EditSection :isEditing="false" />
+    </v-col>
   </v-row>
-  <v-row justify="center">
-    <EditSection :isEditing="false" />
-    <v-btn :loading="loading" @click="exportList"></v-btn>
+  <v-row justify="center" style="align-items: center">
+    <v-btn :loading="loading" @click="exportList" color="tertiary" :style="exported ? 'margin-right: 10px' : ''">
+      export your list!</v-btn
+    >
+    <v-btn v-if="exported" @click="goToList" color="primary" style="margin-left: 10px">Go to your list</v-btn>
   </v-row>
-  <div id="canvas-container"></div>
 </template>
 
 <script setup lang="ts">
@@ -50,18 +54,21 @@ import { ref } from 'vue';
 const listStore = useListStore();
 
 const loading = ref<boolean>(false);
+const exported = ref<boolean>(false);
+const dataUrl = ref<string>('');
 
 async function exportList() {
   loading.value = true;
   await exportImage();
   loading.value = false;
+  //temp exportList function, need to connect to imgur first, not working rn due to work
   const { categories, ratings } = listMakerDataToAPI();
   const canvas = generateKinklistImage(categories, ratings, listStore.username, listStore.encodeData);
-  const container = document.getElementById('canvas-container');
-  if (container) {
-    container.appendChild(canvas);
-  } else {
-    console.error('Canvas container not found!');
-  }
+  dataUrl.value = canvas.toDataURL('png');
+  exported.value = true;
+}
+
+function goToList() {
+  const win = window.open(dataUrl.value, '_blank');
 }
 </script>
