@@ -20,6 +20,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-# Config file made for dev
-src/assets/defaultConfig.ts
